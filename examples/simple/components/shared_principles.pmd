@@ -1,0 +1,14 @@
+{# Shared Principles PMD (Leaf Component)
+
+   Shared principles that can be included by multiple roles.
+   This is a LEAF PMD - pure content, no includes.
+
+   Expected variables: None (self-contained)
+#}
+
+Follow these core principles:
+
+- **Simplicity** - Prefer simple solutions over complex ones
+- **Clarity** - Make intentions explicit
+- **Maintainability** - Write code others can understand
+- **Quality** - Prioritize correctness and reliability

@@ -1,0 +1,21 @@
+{# Composite PMD Example
+
+   This example shows a YMD that includes a COMPOSITE PMD,
+   which in turn includes multiple other PMDs.
+
+   Expected variables:
+   - domain: string - Domain of expertise
+   - task: string - The task description
+#}
+
+meta:
+  id: composite_pmd_example
+  kind: task
+  version: 1.0.0
+  title: Composite PMD Example
+
+system: |
+  {% include "components/complete_profile.pmd" %}
+
+user: |
+  {{ task }}

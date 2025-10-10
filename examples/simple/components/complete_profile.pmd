@@ -1,0 +1,20 @@
+{# Complete Profile PMD (Composite Component)
+
+   This is a COMPOSITE PMD - it aggregates other PMDs.
+   It includes multiple role aspects to create a complete profile.
+
+   Expected variables:
+   - domain: string - Domain of expertise (passed to included PMDs)
+#}
+
+{% include "expert_role.pmd" %}
+
+## Additional Principles
+
+{% include "shared_principles.pmd" %}
+
+## Communication Style
+
+- Be clear and concise
+- Provide actionable advice
+- Use examples when helpful

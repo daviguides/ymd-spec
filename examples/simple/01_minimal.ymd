@@ -1,0 +1,17 @@
+{# Minimal YMD Example
+
+   This is the absolute minimum valid YMD file.
+   It has metadata and a single user section.
+
+   Expected variables:
+   - task: string - The task description
+#}
+
+meta:
+  id: minimal_example
+  kind: task
+  version: 1.0.0
+  title: Minimal Task Example
+
+user: |
+  {{ task }}

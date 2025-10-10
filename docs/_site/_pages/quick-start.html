@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Quick Start | YMD/PMD Specification</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Quick Start" />
+<meta name="author" content="Davi Guides" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating." />
+<meta property="og:description" content="Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating." />
+<link rel="canonical" href="http://localhost:4000/_pages/quick-start.html" />
+<meta property="og:url" content="http://localhost:4000/_pages/quick-start.html" />
+<meta property="og:site_name" content="YMD/PMD Specification" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Quick Start" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Davi Guides"},"description":"Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.","headline":"Quick Start","url":"http://localhost:4000/_pages/quick-start.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="YMD/PMD Specification" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">YMD/PMD Specification</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/_pages/quick-start.html">Quick Start</a><a class="page-link" href="/_pages/specifications.html">Format Specifications</a><a class="page-link" href="/_pages/examples.html">Examples</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Quick Start</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="quick-start-guide">Quick Start Guide</h1>
+
+<p>Get started with YMD/PMD in 5 minutes.</p>
+
+<hr />
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="step-1-clone-repository">Step 1: Clone Repository</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/daviguides/ymd-spec.git
+<span class="nb">cd </span>ymd-spec
+</code></pre></div></div>
+
+<h3 id="step-2-run-installer">Step 2: Run Installer</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./install.sh
+</code></pre></div></div>
+
+<p>This installs specifications to <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/</code>.</p>
+
+<h3 id="step-3-verify-installation">Step 3: Verify Installation</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ~/.claude/ymd-spec/
+</code></pre></div></div>
+
+<p>You should see:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ymd_format_spec.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">pmd_format_spec.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">composition_spec.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">context/</code></li>
+  <li><code class="language-plaintext highlighter-rouge">prompts/</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cheatsheet/</code></li>
+</ul>
+
+<hr />
+
+<h2 id="your-first-ymd-file">Your First YMD File</h2>
+
+<h3 id="create-minimal-ymd">Create Minimal YMD</h3>
+
+<p>Create <code class="language-plaintext highlighter-rouge">my_first_prompt.ymd</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">my_first_prompt</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">My First Prompt</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<p><strong>Key points</strong>:</p>
+<ul>
+  <li>✅ Metadata grouped under <code class="language-plaintext highlighter-rouge">meta:</code></li>
+  <li>✅ At least one section (here: <code class="language-plaintext highlighter-rouge">user</code>)</li>
+  <li>✅ Variables use <code class="language-plaintext highlighter-rouge">{{ variable }}</code></li>
+</ul>
+
+<h3 id="test-it">Test It</h3>
+
+<p>If using <code class="language-plaintext highlighter-rouge">ymd-prompt</code> Python library:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">ymd_prompt</span> <span class="kn">import</span> <span class="n">render_ymd</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="nf">render_ymd</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">my_first_prompt.ymd</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">task</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Explain Python generators</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="your-first-pmd-component">Your First PMD Component</h2>
+
+<h3 id="create-simple-role">Create Simple Role</h3>
+
+<p>Create <code class="language-plaintext highlighter-rouge">components/expert.pmd</code>:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are an expert in {{ domain }}.
+
+Your approach:
+<span class="p">-</span> Provide clear, technical answers
+<span class="p">-</span> Focus on best practices
+<span class="p">-</span> Use concrete examples
+</code></pre></div></div>
+
+<p><strong>Key points</strong>:</p>
+<ul>
+  <li>❌ NO <code class="language-plaintext highlighter-rouge">meta:</code> section (PMDs don’t have metadata!)</li>
+  <li>✅ Pure Markdown + Jinja2</li>
+  <li>✅ Document expected variables in comment</li>
+</ul>
+
+<h3 id="use-it-in-ymd">Use It in YMD</h3>
+
+<p>Update your YMD:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">my_first_prompt</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">My First Prompt</span>
+
+<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% include "components/expert.pmd" %}</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<p>Now the prompt includes the expert role!</p>
+
+<hr />
+
+<h2 id="using-claude-code">Using Claude Code</h2>
+
+<h3 id="load-context">Load Context</h3>
+
+<p>In Claude Code, run:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/load-ymd-context
+</code></pre></div></div>
+
+<p>This loads YMD/PMD knowledge into the session.</p>
+
+<h3 id="create-ymd-with-command">Create YMD with Command</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/create-ymd-manifest
+</code></pre></div></div>
+
+<p>Follow the interactive prompts to create a complete YMD file.</p>
+
+<h3 id="create-pmd-with-command">Create PMD with Command</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/create-pmd-partial
+</code></pre></div></div>
+
+<p>Follow prompts to create a reusable component.</p>
+
+<h3 id="use-interactive-agent">Use Interactive Agent</h3>
+
+<p>For guided creation with conversation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ymd-author I want to create a code review prompt
+</code></pre></div></div>
+
+<p>The agent will guide you step-by-step!</p>
+
+<hr />
+
+<h2 id="common-patterns">Common Patterns</h2>
+
+<h3 id="pattern-1-simple-task">Pattern 1: Simple Task</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">simple_task</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Simple Task</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<h3 id="pattern-2-with-role">Pattern 2: With Role</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">with_role</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Task with Role</span>
+
+<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% include "roles/expert.pmd" %}</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<h3 id="pattern-3-custom-sections">Pattern 3: Custom Sections</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">custom_sections</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Custom Sections</span>
+
+<span class="na">context</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">Working on {{ project_name }}</span>
+
+<span class="na">constraints</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">- Keep code simple</span>
+  <span class="s">- Add error handling</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<h3 id="pattern-4-conditional">Pattern 4: Conditional</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">conditional</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Conditional</span>
+
+<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% if level == "beginner" %}</span>
+  <span class="s">{% include "roles/mentor.pmd" %}</span>
+  <span class="s">{% else %}</span>
+  <span class="s">{% include "roles/expert.pmd" %}</span>
+  <span class="s">{% endif %}</span>
+
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="file-organization">File Organization</h2>
+
+<h3 id="recommended-structure">Recommended Structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my-prompts/
+├── prompts/              # YMD orchestrators
+│   ├── code_review.ymd
+│   ├── api_design.ymd
+│   └── docs_generator.ymd
+│
+└── components/           # PMD components
+    ├── roles/
+    │   ├── expert.pmd
+    │   ├── senior_dev.pmd
+    │   └── mentor.pmd
+    │
+    ├── checklists/
+    │   ├── quality.pmd
+    │   └── security.pmd
+    │
+    ├── formats/
+    │   └── review_comment.pmd
+    │
+    └── shared/
+        └── principles.pmd
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="validation">Validation</h2>
+
+<h3 id="validate-your-files">Validate Your Files</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/validate-composition path/to/file.ymd
+</code></pre></div></div>
+
+<p>Or with the agent:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ymd-validator Check my code_review.ymd
+</code></pre></div></div>
+
+<h3 id="common-issues">Common Issues</h3>
+
+<h4 id="issue-pmd-has-metadata">Issue: PMD has metadata</h4>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- ❌ WRONG --&gt;</span>
+meta:
+  id: component
+</code></pre></div></div>
+
+<p><strong>Fix</strong>: Remove <code class="language-plaintext highlighter-rouge">meta:</code> - only YMD has metadata!</p>
+
+<h4 id="issue-flat-metadata-in-ymd">Issue: Flat metadata in YMD</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ❌ WRONG</span>
+<span class="na">id</span><span class="pi">:</span> <span class="s">example</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+</code></pre></div></div>
+
+<p><strong>Fix</strong>: Group under <code class="language-plaintext highlighter-rouge">meta:</code></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ✅ CORRECT</span>
+<span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">example</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+</code></pre></div></div>
+
+<h4 id="issue-include-not-found">Issue: Include not found</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">include "expert.pmd" %</span><span class="pi">}</span>  <span class="c1"># Can't find it!</span>
+</code></pre></div></div>
+
+<p><strong>Fix</strong>: Use correct relative path</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">include "components/expert.pmd" %</span><span class="pi">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>Now that you have the basics:</p>
+
+<ol>
+  <li><strong>Explore Examples</strong>
+    <ul>
+      <li>Check <code class="language-plaintext highlighter-rouge">examples/simple/</code> for basic patterns</li>
+      <li>Check <code class="language-plaintext highlighter-rouge">examples/ymd-pmd/</code> for real-world example</li>
+    </ul>
+  </li>
+  <li><strong>Read Documentation</strong>
+    <ul>
+      <li><a href="/_pages/specifications.html">Format Specifications</a> - Complete reference</li>
+      <li><a href="/_pages/best-practices.html">Best Practices</a> - Guidelines</li>
+      <li><a href="/_pages/examples.html">Examples</a> - Detailed examples</li>
+    </ul>
+  </li>
+  <li><strong>Create Your Own</strong>
+    <ul>
+      <li>Start with simple YMD</li>
+      <li>Extract reusable parts to PMDs</li>
+      <li>Validate with <code class="language-plaintext highlighter-rouge">/validate-composition</code></li>
+    </ul>
+  </li>
+  <li><strong>Get Help</strong>
+    <ul>
+      <li>Use <code class="language-plaintext highlighter-rouge">@ymd-author</code> for guided creation</li>
+      <li>Use <code class="language-plaintext highlighter-rouge">@composition-expert</code> for structure advice</li>
+      <li>Use <code class="language-plaintext highlighter-rouge">@ymd-validator</code> for debugging</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="cheatsheet">Cheatsheet</h2>
+
+<p>Check: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/cheatsheet/ymd_pmd_cheatsheet.md</code></p>
+
+<p>One-page quick reference for YMD/PMD syntax and patterns.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Davi Guides</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

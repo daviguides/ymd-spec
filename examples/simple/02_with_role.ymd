@@ -1,0 +1,20 @@
+{# YMD with Role Example
+
+   This example shows a YMD with a system section that includes a role PMD.
+
+   Expected variables:
+   - domain: string - Domain of expertise
+   - task: string - The task description
+#}
+
+meta:
+  id: simple_with_role
+  kind: task
+  version: 1.0.0
+  title: Simple Task with Role
+
+system: |
+  {% include "components/expert_role.pmd" %}
+
+user: |
+  {{ task }}

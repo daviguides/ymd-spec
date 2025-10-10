@@ -1,0 +1,38 @@
+{# YMD with Custom Sections Example
+
+   This example demonstrates using custom sections (not standard ones).
+   Sections are fully customizable - use any YAML key that makes sense!
+
+   Expected variables:
+   - project_name: string - Name of the project
+   - requirement: string - The requirement to implement
+#}
+
+meta:
+  id: custom_sections_example
+  kind: task
+  version: 1.0.0
+  title: Custom Sections Example
+
+context: |
+  You are working on the {{ project_name }} project.
+  This is a custom "context" section, not a standard one.
+
+constraints: |
+  Follow these constraints:
+  - Keep code simple and readable
+  - Add appropriate error handling
+  - Include docstrings
+
+  This is a custom "constraints" section.
+
+validation_rules: |
+  Ensure the implementation:
+  - Passes all existing tests
+  - Follows project coding standards
+  - Is well-documented
+
+  This is a custom "validation_rules" section.
+
+user: |
+  Implement this requirement: {{ requirement }}

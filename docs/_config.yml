@@ -1,0 +1,40 @@
+title: YMD/PMD Specification
+description: Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.
+author: "Davi Guides"
+
+theme: minima
+
+baseurl: "/ymd-spec"
+repository: daviguides/ymd-spec
+
+# Minima social links
+github_username: daviguides
+linkedin_username: daviguides
+
+# Minima: show excerpts in the frontpage
+show_excerpts: true
+
+minima:
+  skin: solarized-light
+  date_format: "%Y-%m-%d"
+
+include:
+    - _pages
+
+header_pages:
+  - index.md
+  - _pages/quick-start.md
+  - _pages/specifications.md
+  - _pages/examples.md
+
+exclude: 
+    - .gitignore
+    - docker-compose.yml
+    - Gemfile
+    - Gemfile.lock
+    - LICENSE
+    - README.md
+
+markdown: kramdown
+kramdown:
+  input: GFM

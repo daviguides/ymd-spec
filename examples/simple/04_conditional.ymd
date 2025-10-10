@@ -1,0 +1,36 @@
+{# Conditional Includes Example
+
+   This example shows using Jinja2 conditional logic to include
+   different components based on variables.
+
+   Expected variables:
+   - experience_level: string - "beginner" | "intermediate" | "expert"
+   - task: string - The task description
+#}
+
+meta:
+  id: conditional_example
+  kind: task
+  version: 1.0.0
+  title: Conditional Includes Example
+
+system: |
+  {% if experience_level == "beginner" %}
+  {% include "components/mentor_role.pmd" %}
+  {% elif experience_level == "intermediate" %}
+  {% include "components/senior_role.pmd" %}
+  {% else %}
+  {% include "components/expert_role.pmd" %}
+  {% endif %}
+
+instructions: |
+  {% if experience_level == "beginner" %}
+  Provide detailed explanations with each step.
+  Use simple language and include examples.
+  {% else %}
+  Provide concise, technical explanations.
+  Focus on key decisions and trade-offs.
+  {% endif %}
+
+user: |
+  {{ task }}
