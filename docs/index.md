@@ -46,22 +46,22 @@ Your approach:
 
 ## Key Features
 
-### 🎯 Modular Design
+### Modular Design
 - **YMD files** orchestrate complete prompts
 - **PMD files** are reusable building blocks
 - Compose complex prompts from simple parts
 
-### 🔧 Fully Customizable
+### Fully Customizable
 - Sections are **not limited** to standard names
 - Use any YAML key that makes sense
 - Domain-specific organization supported
 
-### 🔄 Recursive Composition
+### Recursive Composition
 - PMDs can include other PMDs
 - Build hierarchies of components
 - Unlimited nesting (with best practices)
 
-### 📦 Single Source of Truth
+### Single Source of Truth
 - Define components once
 - Reuse across multiple prompts
 - Maintain consistency easily
