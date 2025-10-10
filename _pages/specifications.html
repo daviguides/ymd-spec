@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Format Specifications | YMD/PMD Specification</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Format Specifications" />
+<meta name="author" content="Davi Guides" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating." />
+<meta property="og:description" content="Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating." />
+<meta property="og:site_name" content="YMD/PMD Specification" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Format Specifications" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Davi Guides"},"description":"Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.","headline":"Format Specifications","url":"/ymd-spec/_pages/specifications.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css">
+  <link rel="stylesheet" href="/ymd-spec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/ymd-spec/feed.xml" title="YMD/PMD Specification" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/ymd-spec/">YMD/PMD Specification</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/ymd-spec/">Home</a><a class="page-link" href="/ymd-spec/_pages/quick-start.html">Quick Start</a><a class="page-link" href="/ymd-spec/_pages/specifications.html">Format Specifications</a><a class="page-link" href="/ymd-spec/_pages/examples.html">Examples</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Format Specifications</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="format-specifications">Format Specifications</h1>
+
+<p>Complete reference for YMD and PMD formats.</p>
+
+<hr />
+
+<h2 id="ymd-format">YMD Format</h2>
+
+<h3 id="structure">Structure</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>                    <span class="c1"># Required metadata (grouped)</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">unique_id</span>         <span class="c1"># snake_case identifier</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">category</span>        <span class="c1"># prompt type</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">X.Y.Z</span>        <span class="c1"># semantic versioning</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Title</span>          <span class="c1"># human-readable</span>
+
+<span class="na">section_name</span><span class="pi">:</span> <span class="pi">|</span>         <span class="c1"># Any YAML key (customizable!)</span>
+  <span class="s">{{ variables }}       # Jinja2 variables</span>
+  <span class="s">{% include "file.pmd" %}  # Includes</span>
+</code></pre></div></div>
+
+<h3 id="metadata-fields">Metadata Fields</h3>
+
+<h4 id="metaid-required"><code class="language-plaintext highlighter-rouge">meta.id</code> (required)</h4>
+<ul>
+  <li><strong>Type</strong>: string</li>
+  <li><strong>Format</strong>: snake_case</li>
+  <li><strong>Purpose</strong>: Unique identifier</li>
+  <li><strong>Example</strong>: <code class="language-plaintext highlighter-rouge">code_review_assistant</code></li>
+</ul>
+
+<h4 id="metakind-required"><code class="language-plaintext highlighter-rouge">meta.kind</code> (required)</h4>
+<ul>
+  <li><strong>Type</strong>: string</li>
+  <li><strong>Purpose</strong>: Category/type of prompt</li>
+  <li><strong>Examples</strong>: <code class="language-plaintext highlighter-rouge">review</code>, <code class="language-plaintext highlighter-rouge">task</code>, <code class="language-plaintext highlighter-rouge">api_design</code>, <code class="language-plaintext highlighter-rouge">documentation</code></li>
+</ul>
+
+<h4 id="metaversion-required"><code class="language-plaintext highlighter-rouge">meta.version</code> (required)</h4>
+<ul>
+  <li><strong>Type</strong>: string</li>
+  <li><strong>Format</strong>: Semantic versioning (X.Y.Z)</li>
+  <li><strong>Purpose</strong>: Track changes</li>
+  <li><strong>Example</strong>: <code class="language-plaintext highlighter-rouge">1.0.0</code></li>
+</ul>
+
+<h4 id="metatitle-required"><code class="language-plaintext highlighter-rouge">meta.title</code> (required)</h4>
+<ul>
+  <li><strong>Type</strong>: string</li>
+  <li><strong>Purpose</strong>: Human-readable description</li>
+  <li><strong>Example</strong>: <code class="language-plaintext highlighter-rouge">Code Review Assistant</code></li>
+</ul>
+
+<h3 id="sections">Sections</h3>
+
+<p>Sections are <strong>fully customizable</strong> - not limited to standard names!</p>
+
+<h4 id="standard-sections-optional">Standard Sections (Optional)</h4>
+<p>Commonly used but not required:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">system</code> - Role/persona definition</li>
+  <li><code class="language-plaintext highlighter-rouge">instructions</code> - Step-by-step tasks</li>
+  <li><code class="language-plaintext highlighter-rouge">expected_output</code> - Output format specification</li>
+  <li><code class="language-plaintext highlighter-rouge">developer</code> - Implementation notes</li>
+  <li><code class="language-plaintext highlighter-rouge">user</code> - User input template</li>
+</ul>
+
+<h4 id="custom-sections-any-yaml-key">Custom Sections (Any YAML Key)</h4>
+<p>Use any descriptive name:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">context</code> - Contextual information</li>
+  <li><code class="language-plaintext highlighter-rouge">constraints</code> - Limitations and rules</li>
+  <li><code class="language-plaintext highlighter-rouge">validation_rules</code> - Quality criteria</li>
+  <li><code class="language-plaintext highlighter-rouge">api_principles</code> - API design principles</li>
+  <li><code class="language-plaintext highlighter-rouge">review_focus</code> - Review priorities</li>
+  <li>Any domain-specific name!</li>
+</ul>
+
+<p><strong>Rule</strong>: Use valid YAML key names (snake_case recommended).</p>
+
+<h3 id="jinja2-features">Jinja2 Features</h3>
+
+<h4 id="variables">Variables</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">Analyze {{ code }} for {{ language }}.</span>
+</code></pre></div></div>
+
+<h4 id="includes">Includes</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% include "roles/expert.pmd" %}</span>
+</code></pre></div></div>
+
+<h4 id="control-flow">Control Flow</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">instructions</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% if strict_mode %}</span>
+  <span class="s">Apply strict validation rules.</span>
+  <span class="s">{% else %}</span>
+  <span class="s">Apply relaxed rules.</span>
+  <span class="s">{% endif %}</span>
+</code></pre></div></div>
+
+<h4 id="loops">Loops</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">examples</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% for example in examples %}</span>
+  <span class="s">- {{ example }}</span>
+  <span class="s">{% endfor %}</span>
+</code></pre></div></div>
+
+<h4 id="comments">Comments</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="c1"># This is a Jinja2 comment - won't appear in output #}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="pmd-format">PMD Format</h2>
+
+<h3 id="structure-1">Structure</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{# Optional documentation comment
+   Expected variables:
+<span class="p">   -</span> var1: description
+<span class="p">   -</span> var2: description
+<span class="gh">#}</span>
+
+Markdown content with <span class="gs">**formatting**</span>.
+
+{{ variables }}
+
+{% include "other.pmd" %}
+</code></pre></div></div>
+
+<h3 id="key-rules">Key Rules</h3>
+
+<p><strong>PMD files must</strong>:</p>
+<ul>
+  <li>❌ Have NO <code class="language-plaintext highlighter-rouge">meta:</code> section</li>
+  <li>✅ Be pure Markdown + Jinja2</li>
+  <li>✅ Have single, clear responsibility</li>
+  <li>✅ Document expected variables</li>
+</ul>
+
+<h3 id="component-types">Component Types</h3>
+
+<h4 id="leaf-pmd">Leaf PMD</h4>
+<p>Pure content, no includes:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are an expert in {{ domain }}.
+
+Your expertise:
+<span class="p">-</span> {{ skill_1 }}
+<span class="p">-</span> {{ skill_2 }}
+</code></pre></div></div>
+
+<h4 id="composite-pmd">Composite PMD</h4>
+<p>Aggregates other PMDs:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include "../roles/senior_dev.pmd" %}
+{% include "../shared/principles.pmd" %}
+</code></pre></div></div>
+
+<h3 id="common-categories">Common Categories</h3>
+
+<p>Organize PMDs by purpose:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">roles/</code> - Persona definitions</li>
+  <li><code class="language-plaintext highlighter-rouge">checklists/</code> - Validation lists</li>
+  <li><code class="language-plaintext highlighter-rouge">formats/</code> - Output templates</li>
+  <li><code class="language-plaintext highlighter-rouge">shared/</code> - Common content</li>
+  <li><code class="language-plaintext highlighter-rouge">[domain]/</code> - Domain-specific (e.g., <code class="language-plaintext highlighter-rouge">languages/</code>, <code class="language-plaintext highlighter-rouge">frameworks/</code>)</li>
+</ul>
+
+<hr />
+
+<h2 id="composition-rules">Composition Rules</h2>
+
+<h3 id="include-resolution">Include Resolution</h3>
+
+<p><strong>Rule</strong>: Includes are relative to <strong>current file</strong>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>project/
+├── prompts/main.ymd
+└── components/
+    ├── roles/expert.pmd
+    └── shared/core.pmd
+
+# In main.ymd:
+{% include "../components/roles/expert.pmd" %}
+
+# In roles/expert.pmd:
+{% include "../shared/core.pmd" %}
+</code></pre></div></div>
+
+<h3 id="variable-propagation">Variable Propagation</h3>
+
+<p>Variables flow <strong>down</strong> through include chain:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>YMD defines: domain, language
+  └─ PMD A uses: domain, language
+      └─ PMD A.1 uses: domain
+  └─ PMD B uses: language
+</code></pre></div></div>
+
+<p>All included PMDs have access to variables from YMD.</p>
+
+<h3 id="composition-patterns">Composition Patterns</h3>
+
+<h4 id="simple-ymd--pmd">Simple (YMD → PMD)</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main.ymd
+  └─ includes component.pmd
+</code></pre></div></div>
+
+<h4 id="hierarchical-ymd--pmd--pmd">Hierarchical (YMD → PMD → PMD)</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main.ymd
+  └─ includes profile.pmd
+      └─ includes role.pmd
+</code></pre></div></div>
+
+<h4 id="multiple-includes">Multiple Includes</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main.ymd
+  ├─ includes role.pmd
+  ├─ includes checklist1.pmd
+  └─ includes checklist2.pmd
+</code></pre></div></div>
+
+<h4 id="conditional">Conditional</h4>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">if condition %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">include "path_a.pmd" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">else %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">include "path_b.pmd" %</span><span class="pi">}</span>
+<span class="pi">{</span><span class="err">%</span> <span class="nv">endif %</span><span class="pi">}</span>
+</code></pre></div></div>
+
+<h3 id="depth-recommendations">Depth Recommendations</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Depth</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1-3 levels</td>
+      <td>✅ Good</td>
+    </tr>
+    <tr>
+      <td>4-5 levels</td>
+      <td>✅ Acceptable</td>
+    </tr>
+    <tr>
+      <td>6+ levels</td>
+      <td>⚠️ Consider refactoring</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="validation-rules">Validation Rules</h2>
+
+<h3 id="ymd-validation">YMD Validation</h3>
+
+<p>Required checks:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Has <code class="language-plaintext highlighter-rouge">meta:</code> section (grouped)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Has id, kind, version, title</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Version follows semver</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />At least one section beyond <code class="language-plaintext highlighter-rouge">meta:</code></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Valid YAML syntax</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Valid Jinja2 syntax</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All includes exist</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No circular dependencies</li>
+</ul>
+
+<h3 id="pmd-validation">PMD Validation</h3>
+
+<p>Required checks:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />NO <code class="language-plaintext highlighter-rouge">meta:</code> section</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />NO YAML metadata</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Pure Markdown + Jinja2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Valid Markdown syntax</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Valid Jinja2 syntax</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All includes exist</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No circular dependencies</li>
+</ul>
+
+<h3 id="composition-validation">Composition Validation</h3>
+
+<p>Required checks:</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All include paths are relative</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />No circular dependencies</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Depth reasonable (≤5 levels)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />All variables defined or documented</li>
+</ul>
+
+<hr />
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<h3 id="files">Files</h3>
+<ul>
+  <li><strong>YMD</strong>: <code class="language-plaintext highlighter-rouge">snake_case.ymd</code> (e.g., <code class="language-plaintext highlighter-rouge">code_review_assistant.ymd</code>)</li>
+  <li><strong>PMD</strong>: <code class="language-plaintext highlighter-rouge">snake_case.pmd</code> (e.g., <code class="language-plaintext highlighter-rouge">senior_developer_role.pmd</code>)</li>
+</ul>
+
+<h3 id="identifiers">Identifiers</h3>
+<ul>
+  <li><strong>IDs</strong>: <code class="language-plaintext highlighter-rouge">snake_case</code> (e.g., <code class="language-plaintext highlighter-rouge">api_design_assistant</code>)</li>
+  <li><strong>Sections</strong>: <code class="language-plaintext highlighter-rouge">snake_case</code> (e.g., <code class="language-plaintext highlighter-rouge">review_focus</code>, <code class="language-plaintext highlighter-rouge">api_principles</code>)</li>
+  <li><strong>Variables</strong>: <code class="language-plaintext highlighter-rouge">snake_case</code> (e.g., <code class="language-plaintext highlighter-rouge">user_id</code>, <code class="language-plaintext highlighter-rouge">max_retries</code>)</li>
+</ul>
+
+<h3 id="folders">Folders</h3>
+<ul>
+  <li><strong>Plural</strong>: <code class="language-plaintext highlighter-rouge">roles/</code>, <code class="language-plaintext highlighter-rouge">checklists/</code>, <code class="language-plaintext highlighter-rouge">formats/</code></li>
+  <li><strong>Lowercase</strong>: all lowercase</li>
+</ul>
+
+<hr />
+
+<h2 id="best-practices">Best Practices</h2>
+
+<h3 id="ymd-best-practices">YMD Best Practices</h3>
+
+<p><strong>DO</strong>:</p>
+<ul>
+  <li>✅ Group metadata under <code class="language-plaintext highlighter-rouge">meta:</code></li>
+  <li>✅ Use custom sections for clarity</li>
+  <li>✅ Keep thin (mostly includes)</li>
+  <li>✅ Document expected variables</li>
+  <li>✅ Follow semantic versioning</li>
+</ul>
+
+<p><strong>DON’T</strong>:</p>
+<ul>
+  <li>❌ Put large content inline (extract to PMD)</li>
+  <li>❌ Duplicate content across YMDs</li>
+  <li>❌ Hardcode values (use variables)</li>
+  <li>❌ Forget version updates</li>
+</ul>
+
+<h3 id="pmd-best-practices">PMD Best Practices</h3>
+
+<p><strong>DO</strong>:</p>
+<ul>
+  <li>✅ Single responsibility</li>
+  <li>✅ Descriptive filename</li>
+  <li>✅ Document expected variables</li>
+  <li>✅ Organize by category</li>
+  <li>✅ Test independently</li>
+</ul>
+
+<p><strong>DON’T</strong>:</p>
+<ul>
+  <li>❌ Add YAML metadata</li>
+  <li>❌ Create circular includes</li>
+  <li>❌ Make giant monoliths</li>
+  <li>❌ Use absolute paths</li>
+</ul>
+
+<h3 id="composition-best-practices">Composition Best Practices</h3>
+
+<p><strong>DO</strong>:</p>
+<ul>
+  <li>✅ Document composition structure</li>
+  <li>✅ Keep depth reasonable (≤5 levels)</li>
+  <li>✅ Use relative paths</li>
+  <li>✅ Test include chains</li>
+  <li>✅ Validate no cycles</li>
+</ul>
+
+<p><strong>DON’T</strong>:</p>
+<ul>
+  <li>❌ Nest too deeply</li>
+  <li>❌ Create circular includes</li>
+  <li>❌ Over-engineer simple prompts</li>
+</ul>
+
+<hr />
+
+<h2 id="common-errors">Common Errors</h2>
+
+<h3 id="error-1-flat-metadata-in-ymd">Error 1: Flat Metadata in YMD</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ❌ WRONG</span>
+<span class="na">id</span><span class="pi">:</span> <span class="s">example</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="c1"># ✅ CORRECT</span>
+<span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">example</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">task</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+</code></pre></div></div>
+
+<h3 id="error-2-metadata-in-pmd">Error 2: Metadata in PMD</h3>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- ❌ WRONG --&gt;</span>
+meta:
+  id: component
+
+<span class="c">&lt;!-- ✅ CORRECT - No metadata in PMD --&gt;</span>
+Content here...
+</code></pre></div></div>
+
+<h3 id="error-3-circular-includes">Error 3: Circular Includes</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ❌ WRONG
+a.pmd includes b.pmd
+b.pmd includes c.pmd
+c.pmd includes a.pmd  # Circular!
+
+# ✅ CORRECT
+Extract common content to shared.pmd
+Both a.pmd and b.pmd include shared.pmd
+</code></pre></div></div>
+
+<h3 id="error-4-missing-pipe">Error 4: Missing Pipe</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ❌ WRONG</span>
+<span class="na">user</span><span class="pi">:</span>
+  
+
+<span class="c1"># ✅ CORRECT</span>
+<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{{ task }}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="reference-documents">Reference Documents</h2>
+
+<p>Full specifications available at:</p>
+
+<ul>
+  <li><strong>YMD Format</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/ymd_format_spec.md</code></li>
+  <li><strong>PMD Format</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/pmd_format_spec.md</code></li>
+  <li><strong>Composition</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/composition_spec.md</code></li>
+  <li><strong>Guidelines</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/context/format-guidelines.md</code></li>
+  <li><strong>Quick Reference</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/context/quick-reference.md</code></li>
+  <li><strong>Cheatsheet</strong>: <code class="language-plaintext highlighter-rouge">~/.claude/ymd-spec/cheatsheet/ymd_pmd_cheatsheet.md</code></li>
+</ul>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/ymd-spec/"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Davi Guides</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
