@@ -10,6 +10,8 @@
 
 ## What are YMD and PMD?
 
+<img src="images/ymd-pmd-banner.png" alt="Diagram" align="right" style="width: 500px"/>
+
 **YMD** and **PMD** are file formats designed for prompt engineering that combine the best of YAML, Markdown, and Jinja2 templating.
 
 This repository serves a **triple purpose**:

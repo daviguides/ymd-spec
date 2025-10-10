@@ -4,6 +4,8 @@ title: Home
 nav_order: 1
 ---
 
+<img src="./assets/images/semantic-docstrings-banner.png" alt="Principles Diagram" align="right" style="width: 400px;background-color:#f2f0e9;border-radius: 1rem;margin-left:10px;"/>
+
 # YMD/PMD Format Specification
 
 **Structured, Modular AI Prompts**
