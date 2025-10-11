@@ -2,7 +2,10 @@
   "name": "ymd-spec",
   "version": "0.1.0",
   "description": "YMD/PMD format specification and authoring tools for structured, modular AI prompts",
-  "author": "Davi Guides",
+  "author": {
+      "name": "Davi Guides",
+      "url": "https://github.com/daviguides"
+  },
   "repository": "https://github.com/daviguides/ymd-spec",
   "license": "MIT"
 }
