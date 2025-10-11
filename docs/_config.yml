@@ -4,7 +4,7 @@ author: "Davi Guides"
 
 theme: minima
 
-baseurl: "/ymd-spec"
+baseurl: ""
 repository: daviguides/ymd-spec
 
 # Minima social links

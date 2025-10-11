@@ -1,105 +1,92 @@
 #!/bin/bash
+set -euo pipefail
 
-# YMD-Spec Installation Script
-# Installs YMD/PMD specifications and prompts to ~/.claude/ymd-spec/
+GREEN='\033[0;32m'; BLUE='\033[0;34m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
 
-set -e  # Exit on error
+REPO_URL="https://github.com/daviguides/ymd-spec.git"
+TMP_DIR="/tmp/ymd-spec-$$"
+CLAUDE_DIR="$HOME/.claude"
+TARGET_DIR="$CLAUDE_DIR/ymd-spec"
+CLAUDE_MD="$CLAUDE_DIR/CLAUDE.md"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+SAMPLE_CONFIG="$(cat << 'EOF'
+# Project Documentation Standards
 
-# Installation paths
-SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/ymd-spec"
-TARGET_DIR="$HOME/.claude/ymd-spec"
-BACKUP_DIR="$HOME/.claude/ymd-spec.backup.$(date +%Y%m%d_%H%M%S)"
+## Standards Inheritance
+- **INHERITS FROM**: @./ymd-spec/semantic_docstrings.md
+- **PRECEDENCE**: Project-specific rules override repository defaults
+- **FALLBACK**: When no override exists, ymd-spec applies
+EOF
+)"
 
-echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}YMD-Spec Installation${NC}"
-echo -e "${BLUE}========================================${NC}"
-echo ""
+cleanup() { [ -d "$TMP_DIR" ] && { printf "%b\n" "${BLUE}Cleaning up temporary files...${NC}"; rm -rf "$TMP_DIR"; }; }
+trap cleanup EXIT
 
-# Check if source directory exists
-if [ ! -d "$SOURCE_DIR" ]; then
-    echo -e "${RED}Error: Source directory not found: $SOURCE_DIR${NC}"
-    exit 1
+printf "%b\n" "${BLUE}Semantic Docstrings Installer${NC}"
+printf "%b\n\n" "${BLUE}===========================${NC}"
+
+command -v git >/dev/null 2>&1 || { printf "%b\n" "${RED}Error: git is not installed${NC}"; printf "%s\n" "Install: https://git-scm.com/downloads"; exit 1; }
+
+printf "%b\n" "${BLUE}Cloning Semantic Docstrings repository...${NC}"
+git clone --quiet "$REPO_URL" "$TMP_DIR" 2>/dev/null || { printf "%b\n" "${RED}Error: Failed to clone repository${NC}"; printf "Repository: %s\n" "$REPO_URL"; exit 1; }
+printf "%b\n\n" "${GREEN}✓ Repository cloned successfully${NC}"
+
+[ -d "$CLAUDE_DIR" ] || { printf "%b\n" "${YELLOW}Creating ~/.claude directory...${NC}"; mkdir -p "$CLAUDE_DIR"; }
+
+# --- COPIAR APENAS A SUBPASTA "$TMP_DIR/ymd-spec" ---
+SRC_SUBDIR="$TMP_DIR/ymd-spec"
+if [ ! -d "$SRC_SUBDIR" ]; then
+  printf "%b\n" "${RED}Error: expected subfolder not found:${NC} $SRC_SUBDIR"
+  printf "%s\n" "Repo layout mudou? Verifique se a pasta 'ymd-spec/' existe na raiz do repositório."
+  exit 1
 fi
 
-# Check if ~/.claude directory exists
-if [ ! -d "$HOME/.claude" ]; then
-    echo -e "${YELLOW}~/.claude directory not found. Creating...${NC}"
-    mkdir -p "$HOME/.claude"
-    echo -e "${GREEN}✓ Created ~/.claude directory${NC}"
-fi
-
-# Backup existing installation if it exists
+printf "%b\n" "${BLUE}Installing ymd-spec to $TARGET_DIR...${NC}"
 if [ -d "$TARGET_DIR" ]; then
-    echo -e "${YELLOW}Existing installation found at: $TARGET_DIR${NC}"
-    echo -e "${YELLOW}Creating backup at: $BACKUP_DIR${NC}"
-    cp -R "$TARGET_DIR" "$BACKUP_DIR"
-    echo -e "${GREEN}✓ Backup created${NC}"
-    echo ""
+  read -p "Directory $TARGET_DIR already exists. Overwrite? (y/n) " -n 1 -r; printf "\n"
+  if [[ $REPLY =~ ^[Yy]$ ]]; then rm -rf "$TARGET_DIR"; else printf "%b\n" "${YELLOW}Installation cancelled.${NC}"; exit 0; fi
 fi
-
-# Create target directory
-echo -e "${BLUE}Installing YMD-Spec to: $TARGET_DIR${NC}"
 mkdir -p "$TARGET_DIR"
 
-# Copy files
-echo -e "${BLUE}Copying specification files...${NC}"
-cp -R "$SOURCE_DIR"/* "$TARGET_DIR/"
-
-# Verify installation
-if [ -f "$TARGET_DIR/ymd_format_spec.md" ] && \
-   [ -f "$TARGET_DIR/pmd_format_spec.md" ] && \
-   [ -d "$TARGET_DIR/prompts" ]; then
-    echo -e "${GREEN}✓ Installation successful!${NC}"
+if command -v rsync >/dev/null 2>&1; then
+  # copia apenas o conteúdo da subpasta para o TARGET_DIR
+  rsync -a "$SRC_SUBDIR"/ "$TARGET_DIR"/
 else
-    echo -e "${RED}✗ Installation verification failed${NC}"
-    exit 1
+  # fallback POSIX: copia conteúdo da subpasta (inclui dotfiles)
+  ( set -f; cp -R "$SRC_SUBDIR"/. "$TARGET_DIR"/ )
+fi
+printf "%b\n\n" "${GREEN}✓ ymd-spec installed successfully!${NC}"
+
+if [ ! -f "$CLAUDE_MD" ]; then
+  printf "%b\n" "${BLUE}No CLAUDE.md found in ~/.claude/${NC}"
+  read -p "Create ~/.claude/CLAUDE.md with Semantic Docstrings configuration? (y/n) " -n 1 -r; printf "\n"
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    printf "%s\n" "$SAMPLE_CONFIG" > "$CLAUDE_MD"
+    printf "%b\n\n" "${GREEN}✓ CLAUDE.md created successfully!${NC}"
+  else
+    printf "%b\n" "${YELLOW}Skipped CLAUDE.md creation.${NC}"
+    printf "%b\n\n" "${YELLOW}To use Semantic Docstrings, add this to your ~/.claude/CLAUDE.md:${NC}"
+    printf "%s\n\n" "$SAMPLE_CONFIG"
+  fi
+else
+  printf "%b\n" "${YELLOW}~/.claude/CLAUDE.md already exists.${NC}"
+  read -p "Append Semantic Docstrings configuration to existing CLAUDE.md? (y/n) " -n 1 -r; printf "\n"
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if grep -q "ymd-spec" "$CLAUDE_MD"; then
+      printf "%b\n" "${YELLOW}Semantic Docstrings already referenced in CLAUDE.md${NC}"
+    else
+      printf "\n\n%s\n" "$SAMPLE_CONFIG" >> "$CLAUDE_MD"
+      printf "%b\n\n" "${GREEN}✓ Semantic Docstrings configuration added to CLAUDE.md${NC}"
+    fi
+  else
+    printf "%b\n" "${YELLOW}Skipped CLAUDE.md modification.${NC}"
+    printf "%b\n\n" "${YELLOW}To use Semantic Docstrings, add this to your ~/.claude/CLAUDE.md:${NC}"
+    printf "%s\n\n" "$SAMPLE_CONFIG"
+  fi
 fi
 
-echo ""
-echo -e "${BLUE}========================================${NC}"
-echo -e "${GREEN}Installation Summary${NC}"
-echo -e "${BLUE}========================================${NC}"
-echo ""
-echo -e "Target location: ${GREEN}$TARGET_DIR${NC}"
-echo ""
-echo "Installed files:"
-echo "  ✓ Core specifications (ymd_format_spec.md, pmd_format_spec.md, composition_spec.md)"
-echo "  ✓ Context documentation (context/)"
-echo "  ✓ Business logic prompts (prompts/)"
-echo "  ✓ Cheatsheet (cheatsheet/)"
-echo ""
-
-if [ -d "$BACKUP_DIR" ]; then
-    echo -e "Backup of previous installation: ${YELLOW}$BACKUP_DIR${NC}"
-    echo ""
-fi
-
-echo -e "${BLUE}========================================${NC}"
-echo -e "${GREEN}Next Steps${NC}"
-echo -e "${BLUE}========================================${NC}"
-echo ""
-echo "1. Load YMD/PMD context in Claude Code:"
-echo -e "   ${YELLOW}/load-ymd-context${NC}"
-echo ""
-echo "2. Create your first YMD file:"
-echo -e "   ${YELLOW}/create-ymd-manifest${NC}"
-echo ""
-echo "3. Or use the interactive agent:"
-echo -e "   ${YELLOW}@ymd-author${NC}"
-echo ""
-echo "4. Validate compositions:"
-echo -e "   ${YELLOW}/validate-composition path/to/file.ymd${NC}"
-echo ""
-echo -e "${GREEN}Documentation:${NC}"
-echo -e "  Quick reference: ${BLUE}~/.claude/ymd-spec/context/quick-reference.md${NC}"
-echo -e "  Cheatsheet:      ${BLUE}~/.claude/ymd-spec/cheatsheet/ymd_pmd_cheatsheet.md${NC}"
-echo -e "  Examples:        ${BLUE}~/.claude/ymd-spec/context/examples.md${NC}"
-echo ""
-echo -e "${GREEN}Installation complete! 🎉${NC}"
+printf "%b\n" "${GREEN}Installation complete!${NC}"
+printf "%b\n\n" "${BLUE}Next steps:${NC}"
+printf "%s\n" "1. Check ~/.claude/CLAUDE.md to ensure configuration is correct"
+printf "%s\n" "2. Use Semantic Docstrings in any project by referencing it in project CLAUDE.md"
+printf "%s\n" "3. Docs: https://github.com/daviguides/ymd-spec"
