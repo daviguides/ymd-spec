@@ -1,3 +1,7 @@
+---
+description: Load YMD/PMD Contexts
+---
+
 # Load YMD/PMD Context
 
 Load YMD/PMD format knowledge into your current session to enable authoring and validation.
