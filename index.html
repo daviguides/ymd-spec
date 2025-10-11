@@ -15,14 +15,14 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Home" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Davi Guides"},"description":"Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.","headline":"Home","name":"YMD/PMD Specification","url":"/ymd-spec/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Davi Guides"},"description":"Structured, modular AI prompts using YAML, Markdown, and Jinja2 templating.","headline":"Home","name":"YMD/PMD Specification","url":"/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css">
-  <link rel="stylesheet" href="/ymd-spec/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/ymd-spec/feed.xml" title="YMD/PMD Specification" />
+  <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="YMD/PMD Specification" />
 </head>
 <body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/ymd-spec/">YMD/PMD Specification</a><nav class="site-nav">
+  <div class="wrapper"><a class="site-title" rel="author" href="/">YMD/PMD Specification</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -32,18 +32,82 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/ymd-spec/">Home</a><a class="page-link" href="/ymd-spec/_pages/quick-start.html">Quick Start</a><a class="page-link" href="/ymd-spec/_pages/specifications.html">Format Specifications</a><a class="page-link" href="/ymd-spec/_pages/examples.html">Examples</a></div>
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/_pages/quick-start.html">Quick Start</a><a class="page-link" href="/_pages/specifications.html">Format Specifications</a><a class="page-link" href="/_pages/examples.html">Examples</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 class="page-heading">Home</h1><p><img src="./assets/images/ymd-pmd-banner.png" alt="Principles Diagram" align="right" style="width: 400px;background-color:#f2f0e9;border-radius: 1rem;margin-left:10px;" /></p>
+        <div class="home"><!-- <h1 class="page-heading">Home</h1> --><p><img src="./assets/images/ymd-pmd-banner.png" alt="Principles Diagram" align="right" style="width: 450px;background-color:#f2f0e9;border-radius: 1rem;margin-left:10px;" /></p>
 
 <h1 id="ymdpmd-format-specification">YMD/PMD Format Specification</h1>
 
 <p><strong>Structured, Modular AI Prompts</strong></p>
 
 <p>YMD/PMD is a format for creating maintainable, reusable AI prompts using YAML, Markdown, and Jinja2 templating.</p>
+
+<p><br /><br /></p>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<h3 id="one-line-installation-claude-code-plugin">One-Line Installation (Claude Code Plugin)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/daviguides/ymd-spec/main/install.sh<span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="why-ymdpmd">Why YMD/PMD?</h2>
+
+<h3 id="the-problem-monolithic-prompts">The Problem: Monolithic Prompts</h3>
+
+<p><strong>Traditional prompts create visual coupling that makes it nearly impossible to manage individual concepts:</strong></p>
+
+<ul>
+  <li><strong>No isolation</strong> - Can’t test, version, or update individual concepts (roles, principles, checklists) separately</li>
+  <li><strong>Visual coupling</strong> - 150+ line files mixing multiple concerns make it hard to see where one concept ends and another begins</li>
+  <li><strong>Team friction</strong> - Multiple people can’t work on the same prompt simultaneously without conflicts</li>
+  <li><strong>Duplication everywhere</strong> - Same concepts copied across prompts lead to inconsistent versions</li>
+  <li><strong>Fragile changes</strong> - Small updates require hunting through multiple monolithic files</li>
+</ul>
+
+<p><strong>Example of a monolithic prompt:</strong></p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are a senior Python developer with 10+ years of experience.
+You focus on clean code, SOLID principles, and test coverage.
+You always check for security vulnerabilities.
+You prefer async/await over threading.
+[... 150+ lines mixing role, principles, checklists ...]
+</code></pre></div></div>
+
+<h3 id="the-solution-modular-composition">The Solution: Modular Composition</h3>
+
+<p>YMD/PMD separates concerns into <strong>independent, reusable components</strong> that compose together:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Modular prompt - Each concept is isolated and testable</span>
+<span class="na">meta</span><span class="pi">:</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">python_code_reviewer</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">review</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+
+<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% include "roles/senior_python_dev.pmd" %}</span>
+  <span class="s">{% include "principles/clean_code.pmd" %}</span>
+  <span class="s">{% include "principles/async_first.pmd" %}</span>
+
+<span class="na">review_focus</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">{% include "checklists/security.pmd" %}</span>
+  <span class="s">{% include "checklists/testing.pmd" %}</span>
+</code></pre></div></div>
+
+<p><strong>Benefits:</strong></p>
+
+<ul>
+  <li><strong>Isolated concepts</strong> - Test, version, and update each component independently</li>
+  <li><strong>Clear boundaries</strong> - Each PMD has a single responsibility and purpose</li>
+  <li><strong>Team-friendly</strong> - Different people can work on different components simultaneously</li>
+  <li><strong>Single source of truth</strong> - Update <code class="language-plaintext highlighter-rouge">senior_python_dev.pmd</code> once, affects all prompts that include it</li>
+  <li><strong>Easier maintenance</strong> - See exactly what a prompt includes at a glance</li>
+</ul>
 
 <hr />
 
@@ -74,6 +138,56 @@ Your approach:
 <span class="p">-</span> Clear, actionable feedback
 <span class="p">-</span> Best practices focus
 </code></pre></div></div>
+
+<hr />
+
+<h2 id="tools--integration">Tools &amp; Integration</h2>
+
+<h3 id="claude-code-plugin">Claude Code Plugin</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Commands</span>
+/load-ymd-context          <span class="c"># Load format knowledge</span>
+/create-ymd-manifest       <span class="c"># Create YMD file</span>
+/create-pmd-partial        <span class="c"># Create PMD component</span>
+/validate-composition      <span class="c"># Validate structure</span>
+
+<span class="c"># Agents</span>
+@ymd-author               <span class="c"># Interactive authoring</span>
+@composition-expert       <span class="c"># Structure optimization</span>
+@ymd-validator           <span class="c"># Validation &amp; debugging</span>
+</code></pre></div></div>
+
+<h3 id="python-library">Python Library</h3>
+
+<p><strong><a href="https://github.com/daviguides/ymd-prompt">ymd-prompt</a></strong> - Python library for rendering YMD files</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">ymd_prompt</span> <span class="kn">import</span> <span class="n">render_ymd</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="nf">render_ymd</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">prompts/code_review.ymd</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">python</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">code</span><span class="sh">"</span><span class="p">:</span> <span class="n">code_sample</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="vscode-extension">VSCode Extension</h3>
+
+<p><strong><a href="https://github.com/daviguides/vscode-ymd">vscode-ymd</a></strong> - VSCode syntax highlighting extension:</p>
+<ul>
+  <li>Syntax highlighting for <code class="language-plaintext highlighter-rouge">.ymd</code> and <code class="language-plaintext highlighter-rouge">.pmd</code> files</li>
+  <li>Auto-completion for includes</li>
+  <li>Validation on save</li>
+</ul>
+
+<hr />
+
+<h2 id="documentation">Documentation</h2>
+
+<ul>
+  <li><strong><a href="/_pages/specifications.html">Format Specifications</a></strong> - Complete YMD/PMD format reference</li>
+  <li><strong><a href="/_pages/quick-start.html">Quick Start Guide</a></strong> - Get started in 5 minutes</li>
+  <li><strong><a href="/_pages/examples.html">Examples</a></strong> - Real-world usage examples</li>
+  <li><strong><a href="/_pages/best-practices.html">Best Practices</a></strong> - Guidelines and patterns</li>
+  <li><strong><a href="/_pages/cheatsheet.html">Cheatsheet</a></strong> - Quick reference</li>
+</ul>
 
 <hr />
 
@@ -109,176 +223,11 @@ Your approach:
 
 <hr />
 
-<h2 id="quick-example">Quick Example</h2>
-
-<h3 id="complete-prompt-ymd">Complete Prompt (YMD)</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">meta</span><span class="pi">:</span>
-  <span class="na">id</span><span class="pi">:</span> <span class="s">api_design_assistant</span>
-  <span class="na">kind</span><span class="pi">:</span> <span class="s">api_design</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
-  <span class="na">title</span><span class="pi">:</span> <span class="s">API Design Assistant</span>
-
-<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "roles/api_architect.pmd" %}</span>
-
-<span class="na">api_principles</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "principles/rest_principles.pmd" %}</span>
-
-<span class="na">security_requirements</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "security/api_security.pmd" %}</span>
-
-<span class="na">user</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">Design API for: {{ requirement }}</span>
-</code></pre></div></div>
-
-<h3 id="component-pmd">Component (PMD)</h3>
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You are an API architect specializing in {{ api_style }} APIs.
-
-Your expertise:
-<span class="p">-</span> RESTful design patterns
-<span class="p">-</span> API versioning strategies
-<span class="p">-</span> Performance optimization
-<span class="p">-</span> Security best practices
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="why-ymdpmd">Why YMD/PMD?</h2>
-
-<h3 id="before-monolithic-prompts">Before: Monolithic Prompts</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Hard to maintain</span>
-<span class="c1"># Difficult to reuse</span>
-<span class="c1"># Duplication everywhere</span>
-<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">You are an expert...</span>
-  <span class="s">[100+ lines of mixed content]</span>
-</code></pre></div></div>
-
-<h3 id="after-modular-components">After: Modular Components</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Clean structure</span>
-<span class="c1"># Reusable parts</span>
-<span class="c1"># Easy to maintain</span>
-<span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "roles/expert.pmd" %}</span>
-
-<span class="na">review_focus</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "checklists/quality.pmd" %}</span>
-  <span class="s">{% include "checklists/security.pmd" %}</span>
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="getting-started">Getting Started</h2>
-
-<h3 id="1-install">1. Install</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/daviguides/ymd-spec.git
-<span class="nb">cd </span>ymd-spec
-./install.sh
-</code></pre></div></div>
-
-<h3 id="2-load-context-in-claude-code">2. Load Context (in Claude Code)</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/load-ymd-context
-</code></pre></div></div>
-
-<h3 id="3-create-your-first-prompt">3. Create Your First Prompt</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/create-ymd-manifest
-</code></pre></div></div>
-
-<p>Or use the interactive agent:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@ymd-author
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="documentation">Documentation</h2>
-
-<ul>
-  <li><strong><a href="/ymd-spec/_pages/specifications.html">Format Specifications</a></strong> - Complete YMD/PMD format reference</li>
-  <li><strong><a href="/ymd-spec/_pages/quick-start.html">Quick Start Guide</a></strong> - Get started in 5 minutes</li>
-  <li><strong><a href="/ymd-spec/_pages/examples.html">Examples</a></strong> - Real-world usage examples</li>
-  <li><strong><a href="/ymd-spec/_pages/best-practices.html">Best Practices</a></strong> - Guidelines and patterns</li>
-  <li><strong><a href="/ymd-spec/_pages/cheatsheet.html">Cheatsheet</a></strong> - Quick reference</li>
-</ul>
-
-<hr />
-
-<h2 id="use-cases">Use Cases</h2>
-
-<h3 id="code-review">Code Review</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "roles/senior_dev.pmd" %}</span>
-
-<span class="na">review_focus</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "checklists/quality.pmd" %}</span>
-  <span class="s">{% include "checklists/security.pmd" %}</span>
-</code></pre></div></div>
-
-<h3 id="api-design">API Design</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "roles/api_architect.pmd" %}</span>
-
-<span class="na">api_principles</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "principles/rest_principles.pmd" %}</span>
-</code></pre></div></div>
-
-<h3 id="documentation-1">Documentation</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">system</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "roles/technical_writer.pmd" %}</span>
-
-<span class="na">style_guide</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">{% include "styles/documentation_style.pmd" %}</span>
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="tools--integration">Tools &amp; Integration</h2>
-
-<h3 id="claude-code-plugin">Claude Code Plugin</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Commands</span>
-/load-ymd-context          <span class="c"># Load format knowledge</span>
-/create-ymd-manifest       <span class="c"># Create YMD file</span>
-/create-pmd-partial        <span class="c"># Create PMD component</span>
-/validate-composition      <span class="c"># Validate structure</span>
-
-<span class="c"># Agents</span>
-@ymd-author               <span class="c"># Interactive authoring</span>
-@composition-expert       <span class="c"># Structure optimization</span>
-@ymd-validator           <span class="c"># Validation &amp; debugging</span>
-</code></pre></div></div>
-
-<h3 id="python-library">Python Library</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">ymd_prompt</span> <span class="kn">import</span> <span class="n">render_ymd</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="nf">render_ymd</span><span class="p">(</span>
-    <span class="sh">"</span><span class="s">prompts/code_review.ymd</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">python</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">code</span><span class="sh">"</span><span class="p">:</span> <span class="n">code_sample</span><span class="p">}</span>
-<span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="vscode-extension">VSCode Extension</h3>
-<ul>
-  <li>Syntax highlighting for <code class="language-plaintext highlighter-rouge">.ymd</code> and <code class="language-plaintext highlighter-rouge">.pmd</code> files</li>
-  <li>Auto-completion for includes</li>
-  <li>Validation on save</li>
-</ul>
-
-<hr />
-
 <h2 id="community">Community</h2>
 
 <ul>
   <li><strong>GitHub</strong>: <a href="https://github.com/daviguides/ymd-spec">daviguides/ymd-spec</a></li>
   <li><strong>Issues</strong>: <a href="https://github.com/daviguides/ymd-spec/issues">Report bugs or request features</a></li>
-  <li><strong>Discussions</strong>: <a href="https://github.com/daviguides/ymd-spec/discussions">Ask questions, share prompts</a></li>
-</ul>
-
-<hr />
-
-<h2 id="related-projects">Related Projects</h2>
-
-<ul>
-  <li><strong><a href="https://github.com/daviguides/ymd-prompt">ymd-prompt</a></strong> - Python library for rendering YMD files</li>
-  <li><strong><a href="https://github.com/daviguides/vscode-ymd">vscode-ymd</a></strong> - VSCode syntax highlighting extension</li>
 </ul>
 
 <hr />
@@ -287,13 +236,17 @@ Your expertise:
 
 <p>MIT License - see <a href="https://github.com/daviguides/ymd-spec/blob/main/LICENSE">LICENSE</a> for details.</p>
 
+<p><br /><br /></p>
+
+<p><img src="./assets/images/ymd-pmd-banner.png" alt="Principles Diagram" align="center" style="width: 650px;background-color:#f2f0e9;border-radius: 1rem;margin:0 auto;" /></p>
+
 
 
   </div>
 
       </div>
     </main><footer class="site-footer h-card">
-  <data class="u-url" href="/ymd-spec/"></data>
+  <data class="u-url" href="/"></data>
 
   <div class="wrapper">
     <div class="footer-col-wrapper">
