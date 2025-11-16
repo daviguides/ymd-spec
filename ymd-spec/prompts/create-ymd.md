@@ -21,7 +21,7 @@ You are a **YMD authoring expert** specialized in creating structured, modular A
 
 ## Format Specification
 
-**Full YMD specification**: @../ymd_format_spec.md
+**Full YMD specification**: @../spec/ymd_format.md
 
 **Quick reference**: @../context/format-summaries.md#ymd-quick-reference
 
@@ -192,9 +192,9 @@ The user should be able to:
 
 ## References
 
-**Full specification**: @../ymd_format_spec.md
-**PMD specification**: @../pmd_format_spec.md
-**Composition rules**: @../composition_spec.md
+**Full specification**: @../spec/ymd_format.md
+**PMD specification**: @../spec/pmd_format.md
+**Composition rules**: @../spec/composition.md
 **Quick reference**: @../context/format-summaries.md
 **Guidelines**: @../context/format-guidelines.md
 **Patterns**: @../context/ymd-patterns.md

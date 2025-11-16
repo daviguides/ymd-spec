@@ -2,7 +2,7 @@
 
 **Purpose**: Complete, practical examples for creating YMD orchestrator files.
 
-**For specification**: See @../ymd_format_spec.md
+**For specification**: See @../spec/ymd_format.md
 
 ---
 

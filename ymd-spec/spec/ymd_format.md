@@ -330,7 +330,7 @@ Chain: prompts/a.ymd → components/b.pmd → components/c.pmd → components/b.
 
 ## Related Specifications
 
-- **PMD Format**: See `pmd_format_spec.md`
-- **Composition Rules**: See `composition_spec.md`
+- **PMD Format**: See `pmd_format.md`
+- **Composition Rules**: See `composition.md`
 - **Quick Reference**: See `context/quick-reference.md`
 - **Examples**: See `context/examples.md`

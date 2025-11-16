@@ -9,9 +9,9 @@
 The following specifications define the **WHAT** - complete format rules and syntax:
 
 **Core Format Specifications**:
-- `@~/.claude/ymd-spec/ymd_format_spec.md` - Complete YMD format specification
-- `@~/.claude/ymd-spec/pmd_format_spec.md` - Complete PMD format specification
-- `@~/.claude/ymd-spec/composition_spec.md` - Composition and include rules
+- `@~/.claude/ymd-spec/spec/ymd_format.md` - Complete YMD format specification
+- `@~/.claude/ymd-spec/spec/pmd_format.md` - Complete PMD format specification
+- `@~/.claude/ymd-spec/spec/composition.md` - Composition and include rules
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Purpose**: Condensed quick-reference for YMD and PMD formats.
 
-**Full specifications**: @../ymd_format_spec.md and @../pmd_format_spec.md
+**Full specifications**: @../spec/ymd_format.md and @../spec/pmd_format.md
 
 ---
 

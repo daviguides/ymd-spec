@@ -50,9 +50,9 @@ bundle exec jekyll serve
 ### Core Components
 
 **ymd-spec/** - The specification and context directory (SOURCE OF TRUTH)
-- `ymd_format_spec.md` - Complete YMD specification for LLMs
-- `pmd_format_spec.md` - Complete PMD specification for LLMs
-- `composition_spec.md` - How YMD/PMD compose together
+- `spec/ymd_format.md` - Complete YMD specification for LLMs
+- `spec/pmd_format.md` - Complete PMD specification for LLMs
+- `spec/composition.md` - How YMD/PMD compose together
 - `context/` - Guidelines, quick reference, examples
 - `prompts/` - **Business logic** for commands/agents
 - `cheatsheet/` - Quick lookup reference
@@ -102,7 +102,7 @@ bundle exec jekyll serve
 @~/.claude/ymd-spec/prompts/create-ymd.md
 
 <!-- Agent example -->
-@~/.claude/ymd-spec/ymd_format_spec.md
+@~/.claude/ymd-spec/spec/ymd_format.md
 @~/.claude/ymd-spec/prompts/author-guide.md
 ```
 
@@ -236,8 +236,8 @@ agents/ymd-author.md:
   You are a YMD/PMD authoring specialist.
 
   @~/.claude/ymd-spec/prompts/author-guide.md
-  @~/.claude/ymd-spec/ymd_format_spec.md
-  @~/.claude/ymd-spec/pmd_format_spec.md
+  @~/.claude/ymd-spec/spec/ymd_format.md
+  @~/.claude/ymd-spec/spec/pmd_format.md
 ```
 
 ---
@@ -384,7 +384,7 @@ bash install.sh
 # 3. Installer copies ymd-spec/ → ~/.claude/ymd-spec/
 
 # 4. Commands/agents can now reference:
-@~/.claude/ymd-spec/ymd_format_spec.md
+@~/.claude/ymd-spec/spec/ymd_format.md
 @~/.claude/ymd-spec/prompts/create-ymd.md
 # etc.
 ```

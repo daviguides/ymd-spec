@@ -490,7 +490,7 @@ result = render_ymd(
 
 ## Quick Links
 
-- **Full Specs**: `ymd_format_spec.md`, `pmd_format_spec.md`, `composition_spec.md`
+- **Full Specs**: `spec/ymd_format.md`, `spec/pmd_format.md`, `spec/composition.md`
 - **Guidelines**: `context/format-guidelines.md`
 - **Examples**: `context/examples.md`
 - **Reference**: `context/quick-reference.md`

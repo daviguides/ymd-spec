@@ -585,7 +585,7 @@ def test_variable_coverage():
 
 ## Related Specifications
 
-- **YMD Format**: See `ymd_format_spec.md`
-- **PMD Format**: See `pmd_format_spec.md`
+- **YMD Format**: See `ymd_format.md`
+- **PMD Format**: See `pmd_format.md`
 - **Quick Reference**: See `context/quick-reference.md`
 - **Examples**: See `context/examples.md`

@@ -2,7 +2,7 @@
 
 **Purpose**: Standard categories for organizing PMD components and when to use each.
 
-**For PMD specification**: See @../pmd_format_spec.md
+**For PMD specification**: See @../spec/pmd_format.md
 **For PMD examples**: See @./pmd-examples.md
 
 ---

@@ -2,7 +2,7 @@
 
 **Purpose**: Consolidated formatting rules and syntax guidelines for YMD and PMD files.
 
-**For specifications**: See @../ymd_format_spec.md and @../pmd_format_spec.md
+**For specifications**: See @../spec/ymd_format.md and @../spec/pmd_format.md
 
 ---
 

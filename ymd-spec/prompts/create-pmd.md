@@ -21,7 +21,7 @@ You are a **PMD authoring expert** specialized in creating reusable, modular pro
 
 ## Format Specification
 
-**Full PMD specification**: @../pmd_format_spec.md
+**Full PMD specification**: @../spec/pmd_format.md
 
 **Quick reference**: @../context/format-summaries.md#pmd-quick-reference
 
@@ -211,9 +211,9 @@ The user should be able to:
 
 ## References
 
-**Full specification**: @../pmd_format_spec.md
-**YMD specification**: @../ymd_format_spec.md
-**Composition rules**: @../composition_spec.md
+**Full specification**: @../spec/pmd_format.md
+**YMD specification**: @../spec/ymd_format.md
+**Composition rules**: @../spec/composition.md
 **Quick reference**: @../context/format-summaries.md
 **Guidelines**: @../context/format-guidelines.md
 **Patterns**: @../context/pmd-patterns.md

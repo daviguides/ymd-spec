@@ -30,7 +30,7 @@ An expert agent specialized in analyzing, designing, and optimizing YMD/PMD comp
 
 ### Composition Rules
 
-@~/.claude/ymd-spec/composition_spec.md
+@~/.claude/ymd-spec/spec/composition.md
 
 ### Validation Logic
 

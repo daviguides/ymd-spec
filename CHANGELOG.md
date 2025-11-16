@@ -8,9 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Initial release of YMD/PMD format specification
-- Complete YMD format specification for LLMs (`ymd-spec/ymd_format_spec.md`)
-- Complete PMD format specification for LLMs (`ymd-spec/pmd_format_spec.md`)
-- Composition specification (`ymd-spec/composition_spec.md`)
+- Complete YMD format specification for LLMs (`ymd-spec/spec/ymd_format.md`)
+- Complete PMD format specification for LLMs (`ymd-spec/spec/pmd_format.md`)
+- Composition specification (`ymd-spec/spec/composition.md`)
 - Context guidelines and quick reference (`ymd-spec/context/`)
 - Business logic prompts (`ymd-spec/prompts/`)
 - Cheatsheet for quick lookup (`ymd-spec/cheatsheet/`)

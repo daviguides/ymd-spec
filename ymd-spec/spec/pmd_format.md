@@ -468,7 +468,7 @@ When creating a new PMD file:
 
 ## Related Specifications
 
-- **YMD Format**: See `ymd_format_spec.md`
-- **Composition Rules**: See `composition_spec.md`
+- **YMD Format**: See `ymd_format.md`
+- **Composition Rules**: See `composition.md`
 - **Quick Reference**: See `context/quick-reference.md`
 - **Examples**: See `context/examples.md`

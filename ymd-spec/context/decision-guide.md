@@ -3,9 +3,9 @@
 This guide helps you make design decisions when working with YMD/PMD formats.
 
 **For format rules**, see:
-- `@../ymd_format_spec.md` - YMD format specification
-- `@../pmd_format_spec.md` - PMD format specification
-- `@../composition_spec.md` - Composition rules
+- `@../spec/ymd_format.md` - YMD format specification
+- `@../spec/pmd_format.md` - PMD format specification
+- `@../spec/composition.md` - Composition rules
 
 ---
 
@@ -726,9 +726,9 @@ components/
 ## Related Documents
 
 **Format Specifications**:
-- `@../ymd_format_spec.md` - YMD format details
-- `@../pmd_format_spec.md` - PMD format details
-- `@../composition_spec.md` - Composition rules
+- `@../spec/ymd_format.md` - YMD format details
+- `@../spec/pmd_format.md` - PMD format details
+- `@../spec/composition.md` - Composition rules
 
 **Applied Knowledge**:
 - `@./examples.md` - Complete working examples

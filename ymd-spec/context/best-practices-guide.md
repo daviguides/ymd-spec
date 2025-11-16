@@ -2,7 +2,7 @@
 
 **Purpose**: Applied best practices for creating maintainable, reusable YMD/PMD structures.
 
-**For specifications**: See @../ymd_format_spec.md and @../pmd_format_spec.md
+**For specifications**: See @../spec/ymd_format.md and @../spec/pmd_format.md
 
 ---
 

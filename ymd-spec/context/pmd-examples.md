@@ -2,7 +2,7 @@
 
 **Purpose**: Complete examples of well-formed PMD components across categories.
 
-**For specification**: See @../pmd_format_spec.md
+**For specification**: See @../spec/pmd_format.md
 **For categories**: See @./pmd-categories.md
 
 ---

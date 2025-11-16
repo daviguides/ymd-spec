@@ -34,11 +34,11 @@ A specialized agent for comprehensive validation and quality assurance of YMD/PM
 
 ### Format Specifications
 
-@~/.claude/ymd-spec/ymd_format_spec.md
+@~/.claude/ymd-spec/spec/ymd_format.md
 
-@~/.claude/ymd-spec/pmd_format_spec.md
+@~/.claude/ymd-spec/spec/pmd_format.md
 
-@~/.claude/ymd-spec/composition_spec.md
+@~/.claude/ymd-spec/spec/composition.md
 
 ### Guidelines Reference
 

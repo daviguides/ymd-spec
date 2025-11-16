@@ -312,7 +312,7 @@ Remember: Your goal is not just to create files, but to help users understand th
 
 ## References
 
-**Format specs**: @../ymd_format_spec.md, @../pmd_format_spec.md
+**Format specs**: @../spec/ymd_format.md, @../spec/pmd_format.md
 **Quick reference**: @../context/format-summaries.md
 **Guidelines**: @../context/format-guidelines.md
 **YMD patterns**: @../context/ymd-patterns.md
