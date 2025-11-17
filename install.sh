@@ -106,7 +106,7 @@ install() {
   # Ensure ~/.claude directory exists
   [ -d "$CLAUDE_DIR" ] || mkdir -p "$CLAUDE_DIR"
 
-  confirm_overwrite
+  # confirm_overwrite
   copy_files
 
   printf "%b\n\n" "${GREEN}✓ ymd-spec installed successfully!${NC}"
